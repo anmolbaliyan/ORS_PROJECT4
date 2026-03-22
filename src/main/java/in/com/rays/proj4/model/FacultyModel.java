@@ -344,6 +344,7 @@ public class FacultyModel {
 			rs.close();
 			pstmt.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ApplicationException("Exception : Exception in search Faculty");
 		} finally {
 			JDBCDataSource.closeConnection(conn);

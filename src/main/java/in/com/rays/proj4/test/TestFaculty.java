@@ -20,9 +20,9 @@ public class TestFaculty {
 		//testadd();
 		// testDelete();
 		// testUpdate();
-		 testFindByPk();
+		// testFindByPk();
 		// testFindByEmail();
-		 //testsearch();
+		 testsearch();
 
 	}
 
@@ -143,7 +143,9 @@ public class TestFaculty {
 	public static void testsearch() throws ApplicationException {
 		FacultyBean bean = new FacultyBean();
 		List list = new ArrayList();
-		//list=model.search(bean);
+		bean.setFirstName("R");
+		 FacultyModel model = new FacultyModel();
+		list=model.search(bean, 0, 0);
 		
 		Iterator it = list.iterator();
 		while(it.hasNext()) {
