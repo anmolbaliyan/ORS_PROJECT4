@@ -15,12 +15,12 @@ import in.com.rays.proj4.model.UserModel;
 public class TestUser {
 	public static void main(String[] args) throws ApplicationException, DuplicateRecordException {
 
-		//testadd();
+		// testadd();
 		// testDelete();
-		 testFindByPk();
+		// testFindByPk();
 		// testUpdate();
 		// testSearch();
-		//authenticate();
+		// authenticate();
 
 	}
 
@@ -117,7 +117,7 @@ public class TestUser {
 			UserBean bean = new UserBean();
 
 			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-			//bean.setId(1);
+			// bean.setId(1);
 			bean.setFirstName("Kapil");
 			bean.setLastName("Malviya");
 			bean.setLogin("kmalviya30@gmail.com");
