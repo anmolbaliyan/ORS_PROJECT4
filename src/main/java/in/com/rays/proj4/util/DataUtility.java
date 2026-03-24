@@ -105,6 +105,27 @@ public class DataUtility {
 	}
 
 	public static void main(String[] args) {
+		
+		String s = " ram  ";
+		System.out.println (DataUtility.getString(s));
+		
+		int i = 1234;
+		System.out.println (DataUtility.getStringData(i));
+		
+		String a = "1234";
+		System.out.println (DataUtility.getInt(a));
+		
+		String b = "27689282366";
+		System.out.println (DataUtility.getLong(b));
+		
+		String ds = "2026-03-20";
+		Date date = DataUtility.getDate(ds);
+		System.out.println(date);
+		System.out.println(DataUtility.getDateString(date));
+		
+		
+		
+		
 
 	}
 
