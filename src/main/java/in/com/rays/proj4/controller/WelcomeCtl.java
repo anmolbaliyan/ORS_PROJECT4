@@ -1,0 +1,27 @@
+package in.com.rays.proj4.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import in.com.rays.proj4.util.ServletUtility;
+
+@WebServlet("/WelcomeCtl")
+public class WelcomeCtl extends BaseCtl {
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("in welcomeCtl doGet method");
+		ServletUtility.forward(getView(), request, response);
+	}
+
+	@Override
+	protected String getView() {
+		return ORSView.WELCOME_VIEW;
+	}
+
+}

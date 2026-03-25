@@ -4,4 +4,14 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>BaseCtl</servlet-name>
+  	<display-name>BaseCtl</display-name>
+  	<description></description>
+  	<servlet-class>in.com.rays.proj4.controller.BaseCtl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>BaseCtl</servlet-name>
+  	<url-pattern>/BaseCtl</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -9,12 +9,6 @@
 	<name>wertyu Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-	<properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-	</properties>
-
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -28,10 +22,9 @@
 			<version>1.2.17</version>
 		</dependency>
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<version>9.5.0</version>
-			<scope>compile</scope>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.29</version>
 		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -53,4 +46,8 @@
 	<build>
 		<finalName>ORS_Project4</finalName>
 	</build>
+	<properties>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+	</properties>
 </project>
