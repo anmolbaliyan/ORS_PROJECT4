@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.com.rays.proj4.bean.BaseBean;
+import in.com.rays.proj4.controller.BaseCtl;
+import in.com.rays.proj4.controller.ORSView;
 
 public class ServletUtility {
 
@@ -42,7 +44,7 @@ public class ServletUtility {
 		}
 	}
 
-	/*public static void setErrorMessage(String msg, HttpServletRequest request) {
+	public static void setErrorMessage(String msg, HttpServletRequest request) {
 		request.setAttribute(BaseCtl.MSG_ERROR, msg);
 	}
 
@@ -109,7 +111,7 @@ public class ServletUtility {
 		return (Integer) request.getAttribute("pageSize");
 	}
 
-	public static void handleException(Exception e, HttpServletRequest request, HttpServletResponse response)
+	/*public static void handleException(Exception e, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		request.setAttribute("exception", e);
 		response.sendRedirect(ORSView.ERROR_CTL);

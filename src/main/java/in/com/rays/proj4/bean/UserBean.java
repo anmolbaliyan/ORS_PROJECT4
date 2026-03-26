@@ -3,13 +3,14 @@ package in.com.rays.proj4.bean;
 import java.util.Date;
 
 public class UserBean extends BaseBean {
-	
-	private String firstName; 
+
+	private String firstName;
 	private String lastName;
 	private String login;
 	private String password;
+	private String confirmPassword;
 	private Date dob;
-	private String mobileNo;  
+	private String mobileNo;
 	private long roleId;
 	private String gender;
 
@@ -45,6 +46,14 @@ public class UserBean extends BaseBean {
 		this.password = password;
 	}
 
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public Date getDob() {
 		return dob;
 	}
@@ -76,6 +85,5 @@ public class UserBean extends BaseBean {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
 
 }
