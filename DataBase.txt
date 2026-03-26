@@ -27,6 +27,7 @@
 # last_name            VARCHAR(45)              Last name of the user
 # login                VARCHAR(45)              Login username for the user
 # password             VARCHAR(45)              Password for the user
+# confirm password     VARCHAR(45)              confirm password for user
 # dob                  DATETIME                 Date of birth of the user
 # mobile_no            VARCHAR(45)              Mobile number of the user
 # role_id              BIGINT                   Foreign key referencing st_role (role)
