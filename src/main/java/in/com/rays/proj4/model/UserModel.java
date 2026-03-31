@@ -325,19 +325,15 @@ public class UserModel {
 				bean.setDob(rs.getDate(6));
 				bean.setMobileNo(rs.getString(7));
 				bean.setRoleId(rs.getLong(8));
-				//bean.setUnSuccessfulLogin(rs.getInt(9));
-				bean.setGender(rs.getString(10));
-				//bean.setLastLogin(rs.getTimestamp(11));
-				//bean.setLock(rs.getString(12));
-				//bean.setRegisterdIP(rs.getString(13));
-				//bean.setLastLoginIP(rs.getString(14));
-				bean.setCreatedBy(rs.getString(15));
-				bean.setModifiedBy(rs.getString(16));
-				bean.setCreatedDatetime(rs.getTimestamp(17));
-				bean.setModifiedDatetime(rs.getTimestamp(18));
+				bean.setGender(rs.getString(9));
+				bean.setCreatedBy(rs.getString(10));
+				bean.setModifiedBy(rs.getString(11));
+				bean.setCreatedDatetime(rs.getTimestamp(12));
+				bean.setModifiedDatetime(rs.getTimestamp(13));
 
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			//log.error("Database Exception...", e);
 			throw new ApplicationException("Exception : Exception in get roles");
 

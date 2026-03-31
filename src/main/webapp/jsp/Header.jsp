@@ -25,9 +25,9 @@
 	<b>|</b>
 	<a href="#"><b>User List</b></a>
 	<b>|</b>
-	<a href="#"><b>Add Role</b></a>
+	<a href="<%=ORSView.ROLE_CTL%>"><b>Add Role</b></a>
 	<b>|</b>
-	<a href="#"><b>Role List</b></a>
+	<a href="<%=ORSView.ROLE_LIST_CTL%>"><b>Role List</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=Logout"%>"><b>Logout</b></a>
 	<%

@@ -15,7 +15,7 @@ import in.com.rays.proj4.model.UserModel;
 public class TestUser {
 	public static void main(String[] args) throws ApplicationException, DuplicateRecordException {
 
-		// testadd();
+		 testadd();
 		// testDelete();
 		// testFindByPk();
 		// testUpdate();
