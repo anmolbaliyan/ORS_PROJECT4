@@ -77,4 +77,10 @@ public class StudentBean extends BaseBean{
 		this.collegeName = collegeName;
 	}
 
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

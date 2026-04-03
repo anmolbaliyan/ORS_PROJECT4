@@ -34,44 +34,44 @@
 
 			<table>
 				<tr>
-					<th>First Name:</th>
-					<td><input type="text" name="firstName"
+					<th>First Name:<span style="color:red">*</span></th>
+					<td><input type="text" name="firstName"  placeholder="enter first name"
 						value="<%=DataUtility.getStringData(bean.getFirstName())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("firstName", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Last Name:</th>
-					<td><input type="text" name="lastName"
+					<th>Last Name:<span style="color:red">*</span></th>
+					<td><input type="text" name="lastName"  placeholder="enter Last name"
 						value="<%=DataUtility.getStringData(bean.getLastName())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("lastName", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Login ID:</th>
-					<td><input type="text" name="login"
+					<th>Login ID:<span style="color:red">*</span></th>
+					<td><input type="text" name="login"  placeholder="enter login id"
 						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Password:</th>
-					<td><input type="text" name="password"
+					<th>Password:<span style="color:red">*</span></th>
+					<td><input type="text" name="password"  placeholder="enter password"
 						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Confirm:</th>
-					<td><input type="text" name="confirmPassword"
+					<th>Confirm:<span style="color:red">*</span></th>
+					<td><input type="text" name="confirmPassword"  placeholder="confirm password"
 						value="<%=DataUtility.getStringData(bean.getConfirmPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("confirmPassword", request)%></font></td>
 				</tr>
 				<tr>
-					<th>DOB:</th>
-					<td><input type="date" name="dob"
+					<th>DOB:<span style="color:red">*</span></th>
+					<td><input type="date" name="dob"  placeholder="enter dob"
 						value="<%=DataUtility.getDateString(bean.getDob())%>"
 						style="width: 98%"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Gender:</th>
+					<th>Gender:<span style="color:red">*</span></th>
 					<td><select style="width: 169px; text-align-last: center;"
 						class='form-control' name='gender'>
 							<option selected value=''>-------------Select-------------</option>
@@ -81,8 +81,8 @@
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("gender", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Mobile:</th>
-					<td><input type="text" name="mobileNo"
+					<th>Mobile No:<span style="color:red">*</span></th>
+					<td><input type="text" name="mobileNo"  placeholder="enter mobile no"
 						value="<%=DataUtility.getStringData(bean.getMobileNo())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("mobileNo", request)%></font></td>
 				</tr>

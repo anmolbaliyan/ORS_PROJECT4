@@ -32,21 +32,23 @@
 
 			<table>
 				<tr>
-					<th>Login ID:</th>
-					<td><input type="text" name="login"
+					<th>Login ID:<span style="color:red">*</span></th>
+					<td><input type="text" name="login"  placeholder="enter Login id"
 						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Password:</th>
-					<td><input type="text" name="password"
+					<th>Password:<span style="color:red">*</span></th>
+					<td><input type="text" name="password"  placeholder="enter password"
 						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td><input type="submit" name="operation"
-						value="<%=LoginCtl.OP_SIGN_IN%>"></td>
+						value="<%=LoginCtl.OP_SIGN_IN%>">&nbsp
+						<input type="submit" name="operation"
+						value="<%=LoginCtl.OP_SIGN_UP%>"></td>
 				</tr>
 			</table>
 		</div>
