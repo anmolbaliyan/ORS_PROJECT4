@@ -42,6 +42,6 @@
 	}
 	%>
 	<hr>
-	<%@include file = "footer.jsp"x %>
+	<%@include file = "footer.jsp"%>
 </body>
 </html>
