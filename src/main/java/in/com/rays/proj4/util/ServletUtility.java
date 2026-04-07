@@ -111,10 +111,10 @@ public class ServletUtility {
 		return (Integer) request.getAttribute("pageSize");
 	}
 
-	/*public static void handleException(Exception e, HttpServletRequest request, HttpServletResponse response)
+	public static void handleException(Exception e, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		request.setAttribute("exception", e);
 		response.sendRedirect(ORSView.ERROR_CTL);
-	}*/
+	}
 	
 }
