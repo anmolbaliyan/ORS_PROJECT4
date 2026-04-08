@@ -13,8 +13,6 @@ import in.com.rays.proj4.exception.DatabaseException;
 import in.com.rays.proj4.exception.DuplicateRecordException;
 import in.com.rays.proj4.util.JDBCDataSource;
 
-
-
 public class MarksheetModel {
 
 	public Integer nextPk() throws DatabaseException {
@@ -288,5 +286,40 @@ public class MarksheetModel {
 		return list;
 	}
 
-	
+	public List<MarksheetBean> getMeritList(int pageNo, int pageSize) throws ApplicationException {
+
+		ArrayList<MarksheetBean> list = new ArrayList<MarksheetBean>();
+		StringBuffer sql = new StringBuffer(
+				"select id, roll_no, name, physics, chemistry, maths, (physics + chemistry + maths) as total from st_marksheet where physics > 33 and chemistry > 33 and maths > 33 order by total desc");
+
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			sql.append(" limit " + pageNo + ", " + pageSize);
+		}
+
+		Connection conn = null;
+
+		try {
+			conn = JDBCDataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MarksheetBean bean = new MarksheetBean();
+				bean.setId(rs.getLong(1));
+				bean.setRollNo(rs.getString(2));
+				bean.setName(rs.getString(3));
+				bean.setPhysics(rs.getInt(4));
+				bean.setChemistry(rs.getInt(5));
+				bean.setMaths(rs.getInt(6));
+				list.add(bean);
+			}
+			rs.close();
+			pstmt.close();
+		} catch (Exception e) {
+			throw new ApplicationException("Exception in getting merit list of Marksheet");
+		} finally {
+			JDBCDataSource.closeConnection(conn);
+		}
+		return list;
+	}
 }

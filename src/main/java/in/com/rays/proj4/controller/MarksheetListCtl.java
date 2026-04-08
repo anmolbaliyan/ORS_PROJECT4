@@ -9,26 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.com.rays.proj4.bean.BaseBean;
-import in.com.rays.proj4.bean.StudentBean;
+import in.com.rays.proj4.bean.MarksheetBean;
 import in.com.rays.proj4.exception.ApplicationException;
-import in.com.rays.proj4.model.StudentModel;
+import in.com.rays.proj4.model.MarksheetModel;
 import in.com.rays.proj4.util.DataUtility;
 import in.com.rays.proj4.util.PropertyReader;
 import in.com.rays.proj4.util.ServletUtility;
 
-
-
-@WebServlet(name = "StudentListCtl", urlPatterns = { "/StudentListCtl" })
-public class StudentListCtl extends BaseCtl {
+@WebServlet(name = "MarksheetListCtl", urlPatterns = { "/MarksheetListCtl" })
+public class MarksheetListCtl extends BaseCtl {
 
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 
-		StudentBean bean = new StudentBean();
+		MarksheetBean bean = new MarksheetBean();
 
-		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
-		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
-		bean.setEmail(DataUtility.getString(request.getParameter("email")));
+		bean.setRollNo(DataUtility.getString(request.getParameter("rollNo")));
+		bean.setName(DataUtility.getString(request.getParameter("name")));
 
 		return bean;
 	}
@@ -39,12 +36,12 @@ public class StudentListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		StudentBean bean = (StudentBean) populateBean(request);
-		StudentModel model = new StudentModel();
+		MarksheetBean bean = (MarksheetBean) populateBean(request);
+		MarksheetModel model = new MarksheetModel();
 
 		try {
-			List<StudentBean> list = model.search(bean, pageNo, pageSize);
-			List<StudentBean> next = model.search(bean, pageNo + 1, pageSize);
+			List<MarksheetBean> list = model.search(bean, pageNo, pageSize);
+			List<MarksheetBean> next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.isEmpty()) {
 				ServletUtility.setErrorMessage("No record found", request);
@@ -78,8 +75,8 @@ public class StudentListCtl extends BaseCtl {
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		StudentBean bean = (StudentBean) populateBean(request);
-		StudentModel model = new StudentModel();
+		MarksheetBean bean = (MarksheetBean) populateBean(request);
+		MarksheetModel model = new MarksheetModel();
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 		String[] ids = request.getParameterValues("ids");
@@ -97,28 +94,28 @@ public class StudentListCtl extends BaseCtl {
 				}
 
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.STUDENT_CTL, request, response);
+				ServletUtility.redirect(ORSView.MARKSHEET_CTL, request, response);
 				return;
 
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					StudentBean deletebean = new StudentBean();
+					MarksheetBean deletebean = new MarksheetBean();
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean);
-						ServletUtility.setSuccessMessage("Student is deleted successfully", request);
+						ServletUtility.setSuccessMessage("Marksheet is deleted successfully", request);
 					}
 				} else {
 					ServletUtility.setErrorMessage("Select at least one record", request);
 				}
 
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.STUDENT_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.MARKSHEET_LIST_CTL, request, response);
 				return;
 
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.STUDENT_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.MARKSHEET_LIST_CTL, request, response);
 				return;
 			}
 
@@ -145,6 +142,6 @@ public class StudentListCtl extends BaseCtl {
 
 	@Override
 	protected String getView() {
-		return ORSView.STUDENT_LIST_VIEW;
+		return ORSView.MARKSHEET_LIST_VIEW;
 	}
 }
