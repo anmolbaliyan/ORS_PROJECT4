@@ -29,6 +29,10 @@
 	<b>|</b>
 	<a href="<%=ORSView.ROLE_LIST_CTL%>"><b>Role List</b></a>
 	<b>|</b>
+	<a href=<%=ORSView.COLLEGE_CTL %>><b>Add College</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.COLLEGE_LIST_CTL %>><b>College List</b></a>
+	<b>|</b>
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=Logout"%>"><b>Logout</b></a>
 	
 	<%
