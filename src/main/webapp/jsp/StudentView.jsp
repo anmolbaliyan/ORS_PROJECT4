@@ -97,7 +97,7 @@
 				</tr>
 				<tr>
 					<th align="left">College<span style="color: red">*</span></th>
-					<td><%=HTMLUtility.getList("collegeId", String.valueOf(bean.getCollegeId()), l)%></td>
+					<td><input type="text" name="name" placeholder="Enter College Name" value="<%=ServletUtility.getParameter("name", request)%>">&emsp;</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("collegeId", request)%></font></td>
 				</tr>
 				<tr>

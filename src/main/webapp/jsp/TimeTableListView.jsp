@@ -49,10 +49,10 @@
 
 			<table style="width: 100%">
 				<tr>
-					<td align="right"><label><b>Course Name :</b></label> <%=HTMLUtility.getList("courseId", String.valueOf(bean.getCourseId()), courseList)%>&emsp;
-						<label><b>Subject Name :</b></label> <%=HTMLUtility.getList("subjectId", String.valueOf(bean.getSubjectId()), subjectList)%>&emsp;
+					<td align="right"><label><b>Course Name :</b></label><input type="text" name="name" placeholder="Enter Course Name" value="<%=ServletUtility.getParameter("name", request)%>">&emsp;
+						<label><b>Subject Name :</b></label> <input type="text" name="name" placeholder="Enter Subject Name" value="<%=ServletUtility.getParameter("name", request)%>">&emsp;
 						<label><b>Exam Date :</b></label></td>
-					<td align="left"><input type="text" id="udate" name="examDate" placeholder="Select Date of Birth"
+					<td align="left"><input type="text" id="update" name="examDate" placeholder="Select Date of Exam"
 						value="<%=DataUtility.getDateString(bean.getExamDate())%>">
 				</label>&emsp; <input type="submit" name="operation"
 					value="<%=TimeTableListCtl.OP_SEARCH%>">&nbsp; <input

@@ -58,12 +58,12 @@
 			<table>
 				<tr>
 					<th align="left">Course<span style="color: red">*</span></th>
-					<td><%=HTMLUtility.getList("courseId", String.valueOf(bean.getCourseId()), courseList)%></td>
+					<td><input type="text" name="name" placeholder="Enter Course Name" value="<%=ServletUtility.getParameter("name", request)%>">&emsp;</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("courseId", request)%></font></td>
 				</tr>
 				<tr>
 					<th align="left">Subject<span style="color: red">*</span></th>
-					<td><%=HTMLUtility.getList("subjectId", String.valueOf(bean.getSubjectId()), subjectList)%></td>
+					<td><input type="text" name="name" placeholder="Enter Subject Name" value="<%=ServletUtility.getParameter("name", request)%>">&emsp;</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("subjectId", request)%></font></td>
 				</tr>
 				<tr>

@@ -59,7 +59,7 @@
                 </tr>
                 <tr>
                     <th align="left">Name<span style="color: red">*</span></th>
-                    <td><%=HTMLUtility.getList("studentId", String.valueOf(bean.getStudentId()), studentList)%></td>
+                    <td><input type="text" name="name" placeholder="Enter Name" value="<%=ServletUtility.getParameter("name", request)%>">&emsp;</td>
                     <td style="position: fixed;">
                         <font color="red"><%=ServletUtility.getErrorMessage("studentId", request)%></font>
                     </td>
