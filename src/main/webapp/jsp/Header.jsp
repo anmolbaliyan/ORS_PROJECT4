@@ -20,7 +20,10 @@
 		<%=user.getFirstName()%>
 		(<%=session.getAttribute("role")%>)
 	</h3>
-
+	<a href=<%=ORSView.MY_PROFILE_CTL %>><b>My Profile</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.CHANGE_PASSWORD_CTL %>><b>Change Password</b></a>
+	<b>|</b>
 	<a href="<%=ORSView.USER_CTL%>"><b>Add User</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.USER_LIST_CTL%>"><b>User List</b></a>
@@ -44,6 +47,22 @@
 	<a href=<%=ORSView.MARKSHEET_CTL %>><b>Add Marksheet</b></a>
 	<b>|</b>
 	<a href=<%=ORSView.MARKSHEET_LIST_CTL %>><b>Marksheet List</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.COURSE_CTL %>><b>Add Course</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.COURSE_LIST_CTL %>><b>Course List</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.SUBJECT_CTL %>><b>Add Subject</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.SUBJECT_LIST_CTL %>><b>Subject List</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.TIMETABLE_CTL %>><b>Add Timetable</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.TIMETABLE_LIST_CTL %>><b>Timetable List</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.FACULTY_CTL %>><b>Add Faculty</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.FACULTY_LIST_CTL %>><b>Faculty List</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=Logout"%>"><b>Logout</b></a>
 	
