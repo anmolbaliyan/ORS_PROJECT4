@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.com.rays.proj4.bean.TimeTableBean;
+import in.com.rays.proj4.model.TimeTableModel;
+
 import in.com.rays.proj4.bean.BaseBean;
-import in.com.rays.proj4.bean.SubjectBean;
 import in.com.rays.proj4.exception.ApplicationException;
 import in.com.rays.proj4.model.CourseModel;
 import in.com.rays.proj4.model.SubjectModel;
@@ -17,8 +19,8 @@ import in.com.rays.proj4.util.DataUtility;
 import in.com.rays.proj4.util.PropertyReader;
 import in.com.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "SubjectListCtl", urlPatterns = { "/SubjectListCtl" })
-public class SubjectListCtl extends BaseCtl {
+@WebServlet(name = "TimeTableListCtl", urlPatterns = { "/TimeTableListCtl" })
+public class TimeTableListCtl extends BaseCtl {
 
 	@Override
 	protected void preload(HttpServletRequest request) {
@@ -41,13 +43,11 @@ public class SubjectListCtl extends BaseCtl {
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 
-		SubjectBean bean = new SubjectBean();
+		TimeTableBean bean = new TimeTableBean();
 
-		bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setCourseName(DataUtility.getString(request.getParameter("courseName")));
-		bean.setDescription(DataUtility.getString(request.getParameter("description")));
 		bean.setCourseId(DataUtility.getLong(request.getParameter("courseId")));
-		bean.setId(DataUtility.getLong(request.getParameter("subjectId")));
+		bean.setSubjectId(DataUtility.getLong(request.getParameter("subjectId")));
+		bean.setExamDate(DataUtility.getDate(request.getParameter("examDate")));
 
 		return bean;
 	}
@@ -58,12 +58,12 @@ public class SubjectListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		SubjectBean bean = (SubjectBean) populateBean(request);
-		SubjectModel model = new SubjectModel();
+		TimeTableBean bean = (TimeTableBean) populateBean(request);
+		TimeTableModel model = new TimeTableModel();
 
 		try {
-			List<SubjectBean> list = model.search(bean, pageNo, pageSize);
-			List<SubjectBean> next = model.search(bean, pageNo + 1, pageSize);
+			List<TimeTableBean> list = model.search(bean, pageNo, pageSize);
+			List<TimeTableBean> next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.isEmpty()) {
 				ServletUtility.setErrorMessage("No record found", request);
@@ -97,8 +97,8 @@ public class SubjectListCtl extends BaseCtl {
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		SubjectBean bean = (SubjectBean) populateBean(request);
-		SubjectModel model = new SubjectModel();
+		TimeTableBean bean = (TimeTableBean) populateBean(request);
+		TimeTableModel model = new TimeTableModel();
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 		String[] ids = request.getParameterValues("ids");
@@ -116,13 +116,13 @@ public class SubjectListCtl extends BaseCtl {
 				}
 
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.SUBJECT_CTL, request, response);
+				ServletUtility.redirect(ORSView.TIMETABLE_CTL, request, response);
 				return;
 
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					SubjectBean deletebean = new SubjectBean();
+					TimeTableBean deletebean = new TimeTableBean();
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean);
@@ -133,11 +133,11 @@ public class SubjectListCtl extends BaseCtl {
 				}
 
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.SUBJECT_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.TIMETABLE_LIST_CTL, request, response);
 				return;
 
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.SUBJECT_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.TIMETABLE_LIST_CTL, request, response);
 				return;
 			}
 
@@ -164,6 +164,6 @@ public class SubjectListCtl extends BaseCtl {
 
 	@Override
 	protected String getView() {
-		return ORSView.SUBJECT_LIST_VIEW;
+		return ORSView.TIMETABLE_LIST_VIEW;
 	}
 }

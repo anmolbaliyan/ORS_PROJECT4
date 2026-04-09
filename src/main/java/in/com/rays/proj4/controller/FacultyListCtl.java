@@ -9,45 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.com.rays.proj4.bean.BaseBean;
-import in.com.rays.proj4.bean.SubjectBean;
+import in.com.rays.proj4.bean.FacultyBean;
 import in.com.rays.proj4.exception.ApplicationException;
-import in.com.rays.proj4.model.CourseModel;
-import in.com.rays.proj4.model.SubjectModel;
+import in.com.rays.proj4.model.FacultyModel;
 import in.com.rays.proj4.util.DataUtility;
 import in.com.rays.proj4.util.PropertyReader;
 import in.com.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "SubjectListCtl", urlPatterns = { "/SubjectListCtl" })
-public class SubjectListCtl extends BaseCtl {
-
-	@Override
-	protected void preload(HttpServletRequest request) {
-
-		SubjectModel subjectModel = new SubjectModel();
-		CourseModel courseModel = new CourseModel();
-
-		try {
-			List subjectList = subjectModel.list();
-			request.setAttribute("subjectList", subjectList);
-
-			List courseList = courseModel.list();
-			request.setAttribute("courseList", courseList);
-
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-		}
-	}
+@WebServlet(name = "FacultyListCtl", urlPatterns = { "/FacultyListCtl" })
+public class FacultyListCtl extends BaseCtl {
 
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 
-		SubjectBean bean = new SubjectBean();
+		FacultyBean bean = new FacultyBean();
 
-		bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setCourseName(DataUtility.getString(request.getParameter("courseName")));
-		bean.setDescription(DataUtility.getString(request.getParameter("description")));
-		bean.setCourseId(DataUtility.getLong(request.getParameter("courseId")));
-		bean.setId(DataUtility.getLong(request.getParameter("subjectId")));
+		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
+		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
+		bean.setEmail(DataUtility.getString(request.getParameter("email")));
 
 		return bean;
 	}
@@ -58,12 +37,12 @@ public class SubjectListCtl extends BaseCtl {
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		SubjectBean bean = (SubjectBean) populateBean(request);
-		SubjectModel model = new SubjectModel();
+		FacultyBean bean = (FacultyBean) populateBean(request);
+		FacultyModel model = new FacultyModel();
 
 		try {
-			List<SubjectBean> list = model.search(bean, pageNo, pageSize);
-			List<SubjectBean> next = model.search(bean, pageNo + 1, pageSize);
+			List<FacultyBean> list = model.search(bean, pageNo, pageSize);
+			List<FacultyBean> next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.isEmpty()) {
 				ServletUtility.setErrorMessage("No record found", request);
@@ -79,9 +58,8 @@ public class SubjectListCtl extends BaseCtl {
 
 		} catch (ApplicationException e) {
 			e.printStackTrace();
-			ServletUtility.handleException(e, request, response);
-			return;
 		}
+
 	}
 
 	@Override
@@ -97,8 +75,8 @@ public class SubjectListCtl extends BaseCtl {
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		SubjectBean bean = (SubjectBean) populateBean(request);
-		SubjectModel model = new SubjectModel();
+		FacultyBean bean = (FacultyBean) populateBean(request);
+		FacultyModel model = new FacultyModel();
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 		String[] ids = request.getParameterValues("ids");
@@ -116,28 +94,28 @@ public class SubjectListCtl extends BaseCtl {
 				}
 
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.SUBJECT_CTL, request, response);
+				ServletUtility.redirect(ORSView.FACULTY_CTL, request, response);
 				return;
 
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					SubjectBean deletebean = new SubjectBean();
+					FacultyBean deletebean = new FacultyBean();
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean);
-						ServletUtility.setSuccessMessage("Data is deleted successfully", request);
+						ServletUtility.setSuccessMessage("Faculty is deleted successfully", request);
 					}
 				} else {
 					ServletUtility.setErrorMessage("Select at least one record", request);
 				}
 
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.SUBJECT_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.FACULTY_LIST_CTL, request, response);
 				return;
 
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.SUBJECT_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.FACULTY_LIST_CTL, request, response);
 				return;
 			}
 
@@ -164,6 +142,6 @@ public class SubjectListCtl extends BaseCtl {
 
 	@Override
 	protected String getView() {
-		return ORSView.SUBJECT_LIST_VIEW;
+		return ORSView.FACULTY_LIST_VIEW;
 	}
 }
