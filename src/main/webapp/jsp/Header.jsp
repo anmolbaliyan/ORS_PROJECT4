@@ -47,8 +47,7 @@
 	<b>|</b>
 	<a href=<%=ORSView.GET_MARKSHEET_CTL%>><b>Get Marksheet</b></a>
 	<b>|</b>
-	<a href=<%=ORSView.MARKSHEET_MERIT_LIST_CTL%>><b>Marksheet
-			Merit List</b></a>
+	<a href=<%=ORSView.MARKSHEET_MERIT_LIST_CTL%>><b>Marksheet Merit List</b></a>
 	<b>|</b>
 	<a href=<%=ORSView.MARKSHEET_CTL%>><b>Add Marksheet</b></a>
 	<b>|</b>
@@ -69,6 +68,8 @@
 	<a href=<%=ORSView.FACULTY_CTL%>><b>Add Faculty</b></a>
 	<b>|</b>
 	<a href=<%=ORSView.FACULTY_LIST_CTL%>><b>Faculty List</b></a>
+	<b>|</b>
+	<a target="blank" href="<%=ORSView.JAVA_DOC%>"><b>Java Doc</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=Logout"%>"><b>Logout</b></a>
 

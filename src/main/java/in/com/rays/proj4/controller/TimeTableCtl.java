@@ -21,9 +21,65 @@ import in.com.rays.proj4.util.DataValidator;
 import in.com.rays.proj4.util.PropertyReader;
 import in.com.rays.proj4.util.ServletUtility;
 
+/**
+ * 
+ * Controller class for handling TimeTable operations such as
+ * 
+ * adding, updating, and viewing timetable details.
+ * 
+ * <p>
+ * 
+ * This servlet is mapped to <b>/ctl/TimeTableCtl</b> and is responsible
+ * 
+ * for processing timetable form data, performing validation, and
+ * 
+ * interacting with the TimeTableModel to persist records.
+ * 
+ * </p>
+ *
+ * 
+ * 
+ * <p>
+ * 
+ * It ensures that duplicate timetable entries are not created by
+ * 
+ * performing multiple validation checks before saving or updating data.
+ * 
+ * The class follows MVC architecture by coordinating between
+ * 
+ * view (JSP) and model layers.
+ * 
+ * </p>
+ *
+ * 
+ * 
+ * @author Anmol Kumar Baliyan
+ * 
+ */
 @WebServlet(name = "TimeTableCtl", urlPatterns = { "/ctl/TimeTableCtl" })
 public class TimeTableCtl extends BaseCtl {
 
+	/**
+	 * 
+	 * Preloads data required for the timetable form.
+	 * 
+	 * <p>
+	 * 
+	 * This method retrieves subject and course lists from their respective
+	 * 
+	 * models and sets them into the request scope for populating dropdowns
+	 * 
+	 * in the timetable view.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request HttpServletRequest object to store preload data
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected void preload(HttpServletRequest request) {
 
@@ -42,6 +98,41 @@ public class TimeTableCtl extends BaseCtl {
 		}
 	}
 
+	/**
+	 * 
+	 * Validates timetable input data received from the request.
+	 * 
+	 * <p>
+	 * 
+	 * This method checks mandatory fields such as semester, exam date,
+	 * 
+	 * exam time, description, course, and subject.
+	 * 
+	 * It also validates the date format and ensures that exams are not
+	 * 
+	 * scheduled on Sundays.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * <p>
+	 * 
+	 * If validation fails, appropriate error messages are set in request
+	 * 
+	 * attributes and the method returns false.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request HttpServletRequest containing input parameters
+	 * 
+	 * @return true if all inputs are valid, false otherwise
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 
@@ -86,6 +177,37 @@ public class TimeTableCtl extends BaseCtl {
 		return pass;
 	}
 
+	/**
+	 * 
+	 * Populates a TimeTableBean with request parameters.
+	 * 
+	 * <p>
+	 * 
+	 * This method extracts form input values such as id, semester,
+	 * 
+	 * description, exam time, exam date, courseId, and subjectId,
+	 * 
+	 * and sets them into a TimeTableBean object.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * <p>
+	 * 
+	 * It also calls populateDTO() to set common attributes.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request HttpServletRequest containing user input data
+	 * 
+	 * @return populated TimeTableBean object
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 
@@ -104,6 +226,33 @@ public class TimeTableCtl extends BaseCtl {
 		return bean;
 	}
 
+	/**
+	 * 
+	 * Handles HTTP GET requests to display timetable details.
+	 * 
+	 * <p>
+	 * 
+	 * If an ID is provided, it retrieves the corresponding timetable
+	 * 
+	 * record from the database and sets it in the request for display.
+	 * 
+	 * Otherwise, it simply forwards to the timetable form view.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request  HttpServletRequest containing client request
+	 * 
+	 * @param response HttpServletResponse used to send response
+	 * 
+	 * @throws ServletException if a servlet-specific error occurs
+	 * 
+	 * @throws IOException      if an input/output error occurs
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -124,6 +273,54 @@ public class TimeTableCtl extends BaseCtl {
 		ServletUtility.forward(getView(), request, response);
 	}
 
+	/**
+	 * 
+	 * Handles HTTP POST requests for timetable operations.
+	 * 
+	 * <p>
+	 * 
+	 * This method processes different operations:
+	 * 
+	 * </p>
+	 * 
+	 * <ul>
+	 * 
+	 * <li><b>Save</b>: Adds a new timetable entry after checking for
+	 * duplicates</li>
+	 * 
+	 * <li><b>Update</b>: Updates existing timetable data after validation</li>
+	 * 
+	 * <li><b>Cancel</b>: Redirects to timetable list page</li>
+	 * 
+	 * <li><b>Reset</b>: Reloads the timetable form</li>
+	 * 
+	 * </ul>
+	 *
+	 * 
+	 * 
+	 * <p>
+	 * 
+	 * It performs multiple checks to ensure no duplicate timetable exists
+	 * 
+	 * based on course, subject, semester, exam date, and exam time.
+	 * 
+	 * Appropriate success or error messages are set in the request.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request  HttpServletRequest containing form data
+	 * 
+	 * @param response HttpServletResponse used to send response
+	 * 
+	 * @throws ServletException if a servlet-specific error occurs
+	 * 
+	 * @throws IOException      if an input/output error occurs
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -205,6 +402,25 @@ public class TimeTableCtl extends BaseCtl {
 		ServletUtility.forward(getView(), request, response);
 	}
 
+	/**
+	 * 
+	 * Returns the view page for timetable operations.
+	 * 
+	 * <p>
+	 * 
+	 * This method provides the path of the timetable JSP page
+	 * 
+	 * defined in ORSView.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @return the path of the timetable view page
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected String getView() {
 		return ORSView.TIMETABLE_VIEW;
