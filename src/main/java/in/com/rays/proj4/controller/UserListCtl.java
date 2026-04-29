@@ -17,9 +17,61 @@ import in.com.rays.proj4.util.DataUtility;
 import in.com.rays.proj4.util.PropertyReader;
 import in.com.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "UserListCtl", urlPatterns = { "/UserListCtl" })
+/**
+ * 
+ * Controller class for handling user list operations such as search,
+ * 
+ * pagination, deletion, and navigation.
+ * 
+ * <p>
+ * 
+ * This servlet is mapped to <b>/ctl/UserListCtl</b> and is responsible for
+ * 
+ * displaying user records with support for filtering and pagination.
+ * 
+ * It also provides functionality to delete users and navigate between pages.
+ * 
+ * </p>
+ *
+ * 
+ * 
+ * <p>
+ * 
+ * This class extends {@code BaseCtl} and utilizes common controller
+ * 
+ * functionalities such as request processing, validation, and forwarding.
+ * 
+ * </p>
+ *
+ * 
+ * 
+ * @author Anmol Kumar Baliyan
+ * 
+ */
+@WebServlet(name = "UserListCtl", urlPatterns = { "/ctl/UserListCtl" })
 public class UserListCtl extends BaseCtl {
 
+	/**
+	 * 
+	 * Preloads data required for the view.
+	 * 
+	 * <p>
+	 * 
+	 * This method loads the list of roles from the RoleModel and sets it
+	 * 
+	 * in the request scope so that it can be used for dropdown selection
+	 * 
+	 * in the user list view.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request HttpServletRequest object to store preload data
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected void preload(HttpServletRequest request) {
 		RoleModel roleModel = new RoleModel();
@@ -31,6 +83,27 @@ public class UserListCtl extends BaseCtl {
 		}
 	}
 
+	/**
+	 * 
+	 * Populates a UserBean with request parameters.
+	 * 
+	 * <p>
+	 * 
+	 * This method extracts search parameters such as first name, login,
+	 * 
+	 * and roleId from the request and sets them into a UserBean object.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request HttpServletRequest containing input parameters
+	 * 
+	 * @return populated UserBean object
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 
@@ -43,6 +116,33 @@ public class UserListCtl extends BaseCtl {
 		return bean;
 	}
 
+	/**
+	 * 
+	 * Handles HTTP GET requests to display the user list.
+	 * 
+	 * <p>
+	 * 
+	 * This method initializes pagination parameters, retrieves user data
+	 * 
+	 * based on search criteria, and forwards the request to the user list view.
+	 * 
+	 * It also prepares the next page data to support pagination controls.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request  HttpServletRequest containing client request
+	 * 
+	 * @param response HttpServletResponse used to send response
+	 * 
+	 * @throws ServletException if a servlet-specific error occurs
+	 * 
+	 * @throws IOException      if an input/output error occurs
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -75,6 +175,53 @@ public class UserListCtl extends BaseCtl {
 		}
 	}
 
+	/**
+	 * 
+	 * Handles HTTP POST requests for user list operations.
+	 * 
+	 * <p>
+	 * 
+	 * This method processes various operations such as:
+	 * 
+	 * </p>
+	 * 
+	 * <ul>
+	 * 
+	 * <li><b>Search</b>: Filters users based on input criteria</li>
+	 * 
+	 * <li><b>Next/Previous</b>: Handles pagination navigation</li>
+	 * 
+	 * <li><b>New</b>: Redirects to user creation page</li>
+	 * 
+	 * <li><b>Delete</b>: Deletes selected user records</li>
+	 * 
+	 * <li><b>Reset/Back</b>: Reloads the user list page</li>
+	 * 
+	 * </ul>
+	 *
+	 * 
+	 * 
+	 * <p>
+	 * 
+	 * It updates the request attributes with user data and forwards the
+	 * 
+	 * request to the user list view.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request  HttpServletRequest containing form data
+	 * 
+	 * @param response HttpServletResponse used to send response
+	 * 
+	 * @throws ServletException if a servlet-specific error occurs
+	 * 
+	 * @throws IOException      if an input/output error occurs
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -153,6 +300,25 @@ public class UserListCtl extends BaseCtl {
 		}
 	}
 
+	/**
+	 * 
+	 * Returns the view page for the user list.
+	 * 
+	 * <p>
+	 * 
+	 * This method provides the path of the user list JSP page defined
+	 * 
+	 * in ORSView.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @return the path of the user list view page
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected String getView() {
 		return ORSView.USER_LIST_VIEW;

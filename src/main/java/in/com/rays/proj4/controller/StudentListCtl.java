@@ -18,7 +18,7 @@ import in.com.rays.proj4.util.ServletUtility;
 
 
 
-@WebServlet(name = "StudentListCtl", urlPatterns = { "/StudentListCtl" })
+@WebServlet(name = "StudentListCtl", urlPatterns = { "/ctl/StudentListCtl" })
 public class StudentListCtl extends BaseCtl {
 
 	@Override

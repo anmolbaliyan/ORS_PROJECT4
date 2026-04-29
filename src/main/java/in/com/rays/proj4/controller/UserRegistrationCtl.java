@@ -17,11 +17,83 @@ import in.com.rays.proj4.util.DataUtility;
 import in.com.rays.proj4.util.DataValidator;
 import in.com.rays.proj4.util.ServletUtility;
 
+/**
+ * 
+ * Controller class for handling user registration operations.
+ * 
+ * <p>
+ * 
+ * This servlet is mapped to the URL pattern <b>/UserRegistrationCtl</b>
+ * 
+ * and is responsible for processing user registration requests.
+ * 
+ * It interacts with the view (JSP) and model layers to create
+ * 
+ * new user records in the system.
+ * 
+ * </p>
+ *
+ * 
+ * 
+ * <p>
+ * 
+ * This class extends {@code BaseCtl}, inheriting common controller
+ * 
+ * functionalities such as request handling, validation, and navigation.
+ * 
+ * </p>
+ *
+ * 
+ * 
+ * @author Anmol Kumar Baliyan
+ * 
+ * 
+ * 
+ */
 @WebServlet("/UserRegistrationCtl")
 public class UserRegistrationCtl extends BaseCtl {
 
 	public static final String OP_SIGN_UP = "Sign Up";
 
+	/**
+	 * 
+	 * Validates user input data received from the registration form.
+	 * 
+	 * <p>
+	 * 
+	 * This method checks all required fields such as first name, last name,
+	 * 
+	 * login (email), password, confirm password, gender, date of birth,
+	 * 
+	 * and mobile number. It also validates the format and constraints
+	 * 
+	 * (e.g., email format, password strength, mobile number length).
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * <p>
+	 * 
+	 * If any validation fails, appropriate error messages are set as
+	 * 
+	 * request attributes and the method returns {@code false}.
+	 * 
+	 * If all validations pass, it returns {@code true}.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request HttpServletRequest object containing user input data
+	 * 
+	 * @return {@code true} if all inputs are valid, {@code false} otherwise
+	 *
+	 * 
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 
@@ -99,6 +171,42 @@ public class UserRegistrationCtl extends BaseCtl {
 		return pass;
 	}
 
+	/**
+	 * 
+	 * Populates a UserBean with request parameters received from the registration
+	 * form.
+	 * 
+	 * <p>
+	 * 
+	 * This method extracts form data such as first name, last name, login,
+	 * 
+	 * password, confirm password, gender, date of birth, and mobile number
+	 * 
+	 * from the request and sets them into a UserBean object.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * <p>
+	 * 
+	 * It also sets the default role as STUDENT and calls populateDTO()
+	 * 
+	 * to fill common attributes.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request HttpServletRequest object containing user input data
+	 * 
+	 * @return populated UserBean object
+	 *
+	 * 
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 		UserBean bean = new UserBean();
@@ -118,6 +226,33 @@ public class UserRegistrationCtl extends BaseCtl {
 		return bean;
 	}
 
+	/**
+	 * 
+	 * Handles HTTP GET requests for the User Registration page.
+	 * 
+	 * <p>
+	 * 
+	 * This method forwards the request to the registration view (JSP page)
+	 * 
+	 * where the user can fill in registration details.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request  HttpServletRequest object containing the client request
+	 * 
+	 * @param response HttpServletResponse object used to send response
+	 * 
+	 * @throws ServletException if a servlet-specific error occurs
+	 * 
+	 * @throws IOException      if an input or output error occurs
+	 *
+	 * 
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -125,6 +260,51 @@ public class UserRegistrationCtl extends BaseCtl {
 		ServletUtility.forward(getView(), request, response);
 	}
 
+	/**
+	 * 
+	 * Handles HTTP POST requests for user registration operations.
+	 * 
+	 * <p>
+	 * 
+	 * This method processes form submission based on the operation:
+	 * 
+	 * </p>
+	 * 
+	 * <ul>
+	 * 
+	 * <li><b>OP_SIGN_UP</b>: Registers a new user by populating the bean
+	 * 
+	 * and saving it using the UserModel.</li>
+	 * 
+	 * <li><b>OP_RESET</b>: Redirects the user to reset the registration form.</li>
+	 * 
+	 * </ul>
+	 *
+	 * 
+	 * 
+	 * <p>
+	 * 
+	 * It also handles exceptions such as duplicate login ID and application errors,
+	 * 
+	 * and sets appropriate success or error messages in the request.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @param request  HttpServletRequest object containing form data
+	 * 
+	 * @param response HttpServletResponse object used to send response
+	 * 
+	 * @throws ServletException if a servlet-specific error occurs
+	 * 
+	 * @throws IOException      if an input or output error occurs
+	 *
+	 * 
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -156,6 +336,27 @@ public class UserRegistrationCtl extends BaseCtl {
 
 	}
 
+	/**
+	 * 
+	 * Returns the view page for the User Registration module.
+	 * 
+	 * <p>
+	 * 
+	 * This method provides the path of the registration JSP page
+	 * 
+	 * defined in ORSView.
+	 * 
+	 * </p>
+	 *
+	 * 
+	 * 
+	 * @return the path of the user registration view page
+	 *
+	 * 
+	 * 
+	 * @author Anmol Kumar Baliyan
+	 * 
+	 */
 	@Override
 	protected String getView() {
 		return ORSView.USER_REGISTRATION_VIEW;

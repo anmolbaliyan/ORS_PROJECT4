@@ -19,7 +19,7 @@ import in.com.rays.proj4.util.ServletUtility;
 
 
 
-@WebServlet("/RoleCtl")
+@WebServlet("/ctl/RoleCtl")
 public class RoleCtl extends BaseCtl {
 
 	@Override
