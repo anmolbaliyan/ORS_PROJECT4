@@ -138,4 +138,29 @@ public interface ORSView {
     /** Error Handling */
     public String ERROR_VIEW = PAGE_FOLDER + "/ErrorView.jsp";
     public String ERROR_CTL = APP_CONTEXT + "/ErrorCtl";
+    
+    public String TSESSION_VIEW = PAGE_FOLDER + "/TSessionView.jsp";
+    public String TSESSION_CTL = APP_CONTEXT + "/ctl/TSessionCtl";
+
+    public String TSESSION_LIST_VIEW = PAGE_FOLDER + "/TSessionListView.jsp";
+    public String TSESSION_LIST_CTL = APP_CONTEXT + "/ctl/TSessionListCtl";
+    
+    public String TCPASSWORD_VIEW = PAGE_FOLDER + "/TCPasswordView.jsp";
+    public String TCPASSWORD_CTL = APP_CONTEXT + "/ctl/TCPasswordCtl";
+
+    public String TCPASSWORD_LIST_VIEW = PAGE_FOLDER + "/TCPasswordListView.jsp";
+    public String TCPASSWORD_LIST_CTL = APP_CONTEXT + "/ctl/TCPasswordListCtl";
+    
+    public String TCODE_VIEW = PAGE_FOLDER + "/TCodeView.jsp";
+    public String TCODE_CTL = APP_CONTEXT + "/ctl/TCodeCtl";
+
+    public String TCODE_LIST_VIEW = PAGE_FOLDER + "/TCodeListView.jsp";
+    public String TCODE_LIST_CTL = APP_CONTEXT + "/ctl/TCodeListCtl";
+    
+    public String TPRODUCT_VIEW = PAGE_FOLDER + "/TProductView.jsp";
+    public String TPRODUCT_CTL = APP_CONTEXT + "/ctl/TProductCtl";
+
+    public String TPRODUCT_LIST_VIEW = PAGE_FOLDER + "/TProductListView.jsp";
+    public String TPRODUCT_LIST_CTL = APP_CONTEXT + "/ctl/TProductListCtl";
+
 }

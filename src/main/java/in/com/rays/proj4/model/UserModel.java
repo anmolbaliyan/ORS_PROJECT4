@@ -419,6 +419,8 @@ public class UserModel {
 		return flag;
 	}
 
+
+
 	public long registerUser(UserBean bean) throws DuplicateRecordException, ApplicationException {
 
 		long pk = add(bean);

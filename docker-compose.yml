@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: ORS_Project4-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: project04
+    ports:
+      - "3308:3306"
+    networks:
+      - mynetwork
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  webapp:
+    build:
+      context: .
+    container_name: ORS_Project4-webapp
+    ports:
+      - "8080:8080"
+    networks:
+      - mynetwork
+    depends_on:
+      - mysql
+
+networks:
+  mynetwork:
+    driver: bridge

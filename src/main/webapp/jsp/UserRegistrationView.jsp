@@ -10,6 +10,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script src="/ORS_Project4/js/checkbox.js"></script>
+<script src="/ORS_Project4/js/datepicker.js"></script>
+
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
@@ -34,62 +41,73 @@
 
 			<table>
 				<tr>
-					<th>First Name:<span style="color:red">*</span></th>
-					<td><input type="text" name="firstName"  placeholder="enter first name"
+					<th align="left">First Name:<span style="color: red">*</span></th>
+					<td><input type="text" name="firstName"
+						placeholder="enter first name"
 						value="<%=DataUtility.getStringData(bean.getFirstName())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("firstName", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Last Name:<span style="color:red">*</span></th>
-					<td><input type="text" name="lastName"  placeholder="enter Last name"
+					<th align="left">Last Name:<span style="color: red">*</span></th>
+					<td><input type="text" name="lastName"
+						placeholder="enter Last name"
 						value="<%=DataUtility.getStringData(bean.getLastName())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("lastName", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Login ID:<span style="color:red">*</span></th>
-					<td><input type="text" name="login"  placeholder="enter login id"
+					<th align="left">Login ID:<span style="color: red">*</span></th>
+					<td><input type="text" name="login"
+						placeholder="enter login id"
 						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Password:<span style="color:red">*</span></th>
-					<td><input type="text" name="password"  placeholder="enter password"
+					<th align="left">Password:<span style="color: red">*</span></th>
+					<td><input type="text" name="password"
+						placeholder="enter password"
 						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Confirm:<span style="color:red">*</span></th>
-					<td><input type="text" name="confirmPassword"  placeholder="confirm password"
+					<th align="left">Confirm:<span style="color: red">*</span></th>
+					<td><input type="text" name="confirmPassword"
+						placeholder="confirm password"
 						value="<%=DataUtility.getStringData(bean.getConfirmPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("confirmPassword", request)%></font></td>
 				</tr>
 				<tr>
-					<th>DOB:<span style="color:red">*</span></th>
-					<td><input type="date" name="dob"  placeholder="enter dob"
-						value="<%=DataUtility.getDateString(bean.getDob())%>"
-						style="width: 98%"></td>
+					<th align="left">DOB:<span style="color: red">*</span></th>
+					<td><input type="text" id="udate" name="dob"
+						placeholder="Select Date of Birth"
+						value="<%=DataUtility.getDateString(bean.getDob())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Gender:<span style="color:red">*</span></th>
-					<td><select style="width: 169px; text-align-last: center;"
-						class='form-control' name='gender'>
-							<option selected value=''>-------------Select-------------</option>
-							<option value='female'>female</option>
-							<option value='male'>male</option>
-					</select></td>
+					<th align="left">Gender<span style="color: red">*</span></th>
+					<td>
+						<%
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("Male", "Male");
+						map.put("Female", "Female");
+						String htmlList = HTMLUtility.getList("gender", bean.getGender(), map);
+						%> <%=htmlList%>
+					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("gender", request)%></font></td>
 				</tr>
 				<tr>
-					<th>Mobile No:<span style="color:red">*</span></th>
-					<td><input type="text" name="mobileNo"  placeholder="enter mobile no"
+					<th align="left">Mobile No:<span style="color: red">*</span></th>
+					<td><input type="text" name="mobileNo"
+						placeholder="enter mobile no"
 						value="<%=DataUtility.getStringData(bean.getMobileNo())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("mobileNo", request)%></font></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td><input type="submit" name="operation"
-						value="<%=UserRegistrationCtl.OP_SIGN_UP%>"></td>
+						value="<%=UserRegistrationCtl.OP_SIGN_UP%>"> <input
+						type="submit" name="operation"
+						value="<%=UserRegistrationCtl.OP_RESET%>"></td>
+
 				</tr>
 			</table>
 		</div>

@@ -39,7 +39,7 @@
 				</tr>
 				<tr>
 					<th>Password:<span style="color:red">*</span></th>
-					<td><input type="text" name="password"  placeholder="enter password"
+					<td><input type="password" name="password"  placeholder="enter password"
 						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
 				</tr>
