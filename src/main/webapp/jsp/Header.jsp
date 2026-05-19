@@ -86,6 +86,10 @@
 	<b>|</b>
 	<a href=<%=ORSView.TPRODUCT_LIST_CTL%>><b>TProduct List</b></a>
 	<b>|</b>
+	<a href=<%=ORSView.TBANKING_CTL%>><b>Add TBanking</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.TBANKING_LIST_CTL%>><b>TBanking List</b></a>
+	<b>|</b>
 	<a target="blank" href="<%=ORSView.JAVA_DOC%>"><b>Java Doc</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=Logout"%>"><b>Logout</b></a>

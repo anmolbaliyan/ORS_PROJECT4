@@ -162,5 +162,11 @@ public interface ORSView {
 
     public String TPRODUCT_LIST_VIEW = PAGE_FOLDER + "/TProductListView.jsp";
     public String TPRODUCT_LIST_CTL = APP_CONTEXT + "/ctl/TProductListCtl";
+    
+    public String TBANKING_VIEW = PAGE_FOLDER + "/TBankingView.jsp";
+    public String TBANKING_CTL = APP_CONTEXT + "/ctl/TBankingCtl";
+
+    public String TBANKING_LIST_VIEW = PAGE_FOLDER + "/TBankingListView.jsp";
+    public String TBANKING_LIST_CTL = APP_CONTEXT + "/ctl/TBankingListCtl";
 
 }
