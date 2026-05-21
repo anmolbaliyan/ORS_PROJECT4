@@ -12,9 +12,26 @@ import in.com.rays.proj4.exception.DatabaseException;
 import in.com.rays.proj4.exception.DuplicateRecordException;
 import in.com.rays.proj4.util.JDBCDataSource;
 
-
+/**
+ * CourseModel provides CRUD and search operations for {@link CourseBean}
+ * against the database table {@code st_course}.
+ * <p>
+ * It uses {@link JDBCDataSource} to obtain and close connections and throws
+ * application-specific checked exceptions to signal error conditions.
+ * </p>
+ * 
+ * @author Anmo Kumar Baliyan
+ * @version 1.0
+ */
 
 public class CourseModel {
+	
+	/**
+     * Returns the next primary key value for the st_course table.
+     *
+     * @return next primary key value
+     * @throws DatabaseException if a database error occurs while retrieving the maximum id
+     */
 
 	public Integer nextPk() throws DatabaseException {
 		Connection conn = null;
@@ -35,6 +52,19 @@ public class CourseModel {
 		}
 		return pk + 1;
 	}
+	
+	 /**
+     * Adds a new Course record to the database.
+     * <p>
+     * Before insertion it checks for duplicate course name and throws
+     * {@link DuplicateRecordException} if a record with same name exists.
+     * </p>
+     *
+     * @param bean {@link CourseBean} containing course data to add
+     * @return the primary key of the newly inserted course
+     * @throws ApplicationException     if a general application/database error occurs
+     * @throws DuplicateRecordException if a course with same name already exists
+     */
 
 	public long add(CourseBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
@@ -75,6 +105,19 @@ public class CourseModel {
 		}
 		return pk;
 	}
+	
+	 /**
+     * Updates an existing Course record.
+     * <p>
+     * It checks for duplicate course name (other than the current record) and
+     * throws {@link DuplicateRecordException} if a different record with same
+     * name exists.
+     * </p>
+     *
+     * @param bean {@link CourseBean} containing updated course data
+     * @throws ApplicationException     if a general application/database error occurs
+     * @throws DuplicateRecordException if another course with same name exists
+     */
 
 	public void update(CourseBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
@@ -111,6 +154,13 @@ public class CourseModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 	}
+	
+	 /**
+     * Deletes a Course record.
+     *
+     * @param bean {@link CourseBean} whose id identifies the course to delete
+     * @throws ApplicationException if a general application/database error occurs
+     */
 
 	public void delete(CourseBean bean) throws ApplicationException {
 		Connection conn = null;
@@ -134,6 +184,14 @@ public class CourseModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 	}
+	
+	/**
+     * Finds a Course record by primary key.
+     *
+     * @param pk primary key (id) of the course
+     * @return {@link CourseBean} if found; {@code null} otherwise
+     * @throws ApplicationException if a general application/database error occurs
+     */
 
 	public CourseBean findByPk(long pk) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_course where id = ?");
@@ -164,6 +222,14 @@ public class CourseModel {
 		}
 		return bean;
 	}
+	
+	 /**
+     * Finds a Course record by its name.
+     *
+     * @param name name of the course
+     * @return {@link CourseBean} if found; {@code null} otherwise
+     * @throws ApplicationException if a general application/database error occurs
+     */
 
 	public CourseBean findByName(String name) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_course where name = ?");
@@ -196,10 +262,29 @@ public class CourseModel {
 		}
 		return bean;
 	}
+	
+	 /**
+     * Returns a list of all courses. This is a convenience wrapper around
+     * {@link #search(CourseBean, int, int)} with no filter and no pagination.
+     *
+     * @return list of all {@link CourseBean}
+     * @throws ApplicationException if a general application/database error occurs
+     */
 
 	public List<CourseBean> list() throws ApplicationException {
 		return search(null, 0, 0);
 	}
+	
+	 /**
+     * Searches for courses matching the criteria provided in {@code bean}.
+     * If {@code pageSize} &gt; 0, results are paginated.
+     *
+     * @param bean     filter criteria; if {@code null} returns all records
+     * @param pageNo   page number (1-based) when paginating; ignored if pageSize is 0
+     * @param pageSize number of records per page; pass 0 to disable pagination
+     * @return list of matching {@link CourseBean}
+     * @throws ApplicationException if a general application/database error occurs
+     */
 
 	public List<CourseBean> search(CourseBean bean, int pageNo, int pageSize) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_course where 1=1");
