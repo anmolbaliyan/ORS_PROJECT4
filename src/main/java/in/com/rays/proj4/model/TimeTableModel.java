@@ -15,7 +15,24 @@ import in.com.rays.proj4.exception.DatabaseException;
 import in.com.rays.proj4.exception.DuplicateRecordException;
 import in.com.rays.proj4.util.JDBCDataSource;
 
+/**
+ * TimetableModel handles all database operations related to the Timetable
+ * entity. It provides CRUD operations, search functionality, and validation
+ * checks to prevent duplicate timetable entries. This model interacts with the
+ * st_timetable table in the database.
+ * 
+ * @author Anmol Kumar Baliyan
+ * @version 1.0
+ */
+
 public class TimeTableModel {
+
+	/**
+	 * Returns the next primary key for st_timetable.
+	 *
+	 * @return next PK as Integer
+	 * @throws DatabaseException if database access fails
+	 */
 
 	public Integer nextPk() throws DatabaseException {
 		Connection conn = null;
@@ -36,6 +53,15 @@ public class TimeTableModel {
 		}
 		return pk + 1;
 	}
+
+	/**
+	 * Adds a new timetable entry to the database.
+	 *
+	 * @param bean TimetableBean containing details to insert
+	 * @return generated primary key
+	 * @throws ApplicationException     if unable to add record
+	 * @throws DuplicateRecordException if duplicate timetable exists
+	 */
 
 	public long add(TimeTableBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
@@ -85,6 +111,14 @@ public class TimeTableModel {
 		return pk;
 	}
 
+	/**
+	 * Updates an existing timetable entry.
+	 *
+	 * @param bean TimetableBean containing updated details
+	 * @throws ApplicationException     if failed to update
+	 * @throws DuplicateRecordException if conflicting record exists
+	 */
+
 	public void update(TimeTableBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
@@ -132,6 +166,13 @@ public class TimeTableModel {
 		}
 	}
 
+	/**
+	 * Deletes a timetable entry.
+	 *
+	 * @param bean TimetableBean with ID to delete
+	 * @throws ApplicationException if delete fails
+	 */
+
 	public void delete(TimeTableBean bean) throws ApplicationException {
 		Connection conn = null;
 		try {
@@ -154,6 +195,14 @@ public class TimeTableModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 	}
+
+	/**
+	 * Finds timetable by its primary key.
+	 *
+	 * @param pk primary key
+	 * @return TimetableBean
+	 * @throws ApplicationException if retrieval fails
+	 */
 
 	public TimeTableBean findByPk(long pk) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_timetable where id = ?");
@@ -189,6 +238,10 @@ public class TimeTableModel {
 		}
 		return bean;
 	}
+
+	/**
+	 * Checks if timetable exists for given course on a specific exam date.
+	 */
 
 	public TimeTableBean checkByCourseName(Long courseId, Date examDate) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_timetable where course_id = ? and exam_date = ?");
@@ -228,6 +281,10 @@ public class TimeTableModel {
 		}
 		return bean;
 	}
+
+	/**
+	 * Checks if timetable exists for given subject, course, and exam date.
+	 */
 
 	public TimeTableBean checkBySubjectName(Long courseId, Long subjectId, Date examDate) throws ApplicationException {
 		StringBuffer sql = new StringBuffer(
@@ -270,6 +327,10 @@ public class TimeTableModel {
 		return bean;
 	}
 
+	/**
+	 * Checks timetable by semester, course, subject, and exam date.
+	 */
+
 	public TimeTableBean checkBySemester(Long courseId, Long subjectId, String semester, Date examDate)
 			throws ApplicationException {
 		StringBuffer sql = new StringBuffer(
@@ -311,6 +372,10 @@ public class TimeTableModel {
 		}
 		return bean;
 	}
+
+	/**
+	 * Checks timetable by exam time and description.
+	 */
 
 	public TimeTableBean checkByExamTime(Long courseId, Long subjectId, String semester, Date examDate, String examTime,
 			String description) throws ApplicationException {
@@ -355,6 +420,26 @@ public class TimeTableModel {
 		}
 		return bean;
 	}
+
+	/**
+	 * Returns a list of all timetable entries or paginated list.
+	 *
+	 * @return List of TimetableBean
+	 * @throws ApplicationException if db access fails
+	 */
+	public List<TimeTableBean> list() throws ApplicationException {
+		return search(null, 0, 0);
+	}
+
+	/**
+	 * Searches timetable records based on given parameters.
+	 *
+	 * @param bean     search criteria bean
+	 * @param pageNo   page number
+	 * @param pageSize number of records per page
+	 * @return list of matching timetables
+	 * @throws ApplicationException if search fails
+	 */
 
 	public List<TimeTableBean> search(TimeTableBean bean, int pageNo, int pageSize) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_timetable where 1=1");
