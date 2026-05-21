@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.com.rays.proj4.bean.BaseBean;
 import in.com.rays.proj4.bean.RoleBean;
 import in.com.rays.proj4.bean.UserBean;
@@ -52,6 +54,7 @@ import in.com.rays.proj4.util.ServletUtility;
  */
 @WebServlet("/UserRegistrationCtl")
 public class UserRegistrationCtl extends BaseCtl {
+	private static final Logger log = Logger.getLogger(UserRegistrationCtl.class);
 
 	public static final String OP_SIGN_UP = "Sign Up";
 
@@ -96,6 +99,8 @@ public class UserRegistrationCtl extends BaseCtl {
 	 */
 	@Override
 	protected boolean validate(HttpServletRequest request) {
+
+		log.debug("UserRegistrationCtl validate() called");
 
 		boolean pass = true;
 
@@ -168,6 +173,8 @@ public class UserRegistrationCtl extends BaseCtl {
 			pass = false;
 		}
 
+		log.debug("Validation completed. Status = " + pass);
+
 		return pass;
 	}
 
@@ -209,6 +216,9 @@ public class UserRegistrationCtl extends BaseCtl {
 	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
+
+		log.debug("UserRegistrationCtl populateBean() called");
+
 		UserBean bean = new UserBean();
 
 		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
@@ -222,6 +232,8 @@ public class UserRegistrationCtl extends BaseCtl {
 		bean.setRoleId(RoleBean.STUDENT);
 
 		populateDTO(bean, request);
+
+		log.debug("UserBean populated successfully");
 
 		return bean;
 	}
@@ -256,8 +268,14 @@ public class UserRegistrationCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		log.info("UserRegistrationCtl doGet() started");
+
 		System.out.println("in UserRegistrationCtl doGet method");
+
 		ServletUtility.forward(getView(), request, response);
+
+		log.info("doGet() forwarded to view : " + getView());
 	}
 
 	/**
@@ -308,32 +326,61 @@ public class UserRegistrationCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		log.info("UserRegistrationCtl doPost() started");
+
 		System.out.println("in UserRegistrationCtl doPost method");
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 
+		log.info("Operation = " + op);
+
 		UserModel model = new UserModel();
 
 		if (OP_SIGN_UP.equalsIgnoreCase(op)) {
+
 			UserBean bean = (UserBean) populateBean(request);
 
 			try {
+
+				log.info("Attempting user registration for : " + bean.getLogin());
+
 				long pk = model.add(bean);
+
+				log.info("User registered successfully. PK = " + pk);
+
 				ServletUtility.setBean(bean, request);
+
 				ServletUtility.setSuccessMessage("Registration successful!", request);
+
 			} catch (DuplicateRecordException e) {
+
+				log.error("Duplicate Login Id detected", e);
+
 				ServletUtility.setBean(bean, request);
+
 				ServletUtility.setErrorMessage("Login id already exists", request);
+
 			} catch (ApplicationException e) {
+
+				log.error("ApplicationException in UserRegistrationCtl doPost()", e);
+
 				e.printStackTrace();
 				return;
 			}
+
 			ServletUtility.forward(getView(), request, response);
+
+			log.info("Registration page forwarded to view : " + getView());
+
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
+
+			log.info("Reset operation invoked. Redirecting to registration page");
+
 			ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, request, response);
+
 			return;
 		}
-
 	}
 
 	/**
@@ -359,6 +406,9 @@ public class UserRegistrationCtl extends BaseCtl {
 	 */
 	@Override
 	protected String getView() {
+
+		log.debug("Returning User Registration view page");
+
 		return ORSView.USER_REGISTRATION_VIEW;
 	}
 
