@@ -13,9 +13,27 @@ import in.com.rays.proj4.exception.DatabaseException;
 import in.com.rays.proj4.exception.DuplicateRecordException;
 import in.com.rays.proj4.util.JDBCDataSource;
 
-
+/**
+ * StudentModel provides CRUD and search operations for StudentBean,
+ * interacting with the {@code st_student} table via JDBC.
+ *
+ * <p>
+ * This class throws application-specific exceptions defined in the project
+ * (ApplicationException, DatabaseException, DuplicateRecordException).
+ * </p>
+ *
+ * @author Anmol Kumar Baliyan
+ * @version 1.0
+ */
 
 public class StudentModel {
+	
+	/**
+	 * Returns next primary key value for st_student table.
+	 *
+	 * @return next primary key (Integer)
+	 * @throws DatabaseException if a database access error occurs
+	 */
 
 	public Integer nextPk() throws DatabaseException {
 
@@ -38,6 +56,15 @@ public class StudentModel {
 		}
 		return pk + 1;
 	}
+	
+	/**
+	 * Adds a new student record into database.
+	 *
+	 * @param bean StudentBean containing student data to add
+	 * @return primary key of newly inserted student
+	 * @throws ApplicationException     if any SQL exception occurs while adding student
+	 * @throws DuplicateRecordException if a student with same email already exists
+	 */
 
 	public long add(StudentBean bean) throws ApplicationException, DuplicateRecordException {
 
@@ -89,6 +116,14 @@ public class StudentModel {
 		}
 		return pk;
 	}
+	
+	/**
+	 * Updates an existing student record.
+	 *
+	 * @param bean StudentBean containing updated values (must include id)
+	 * @throws ApplicationException     if a SQL error occurs while updating
+	 * @throws DuplicateRecordException if another student with same email exists
+	 */
 
 	public void update(StudentBean bean) throws ApplicationException, DuplicateRecordException {
 
@@ -137,6 +172,13 @@ public class StudentModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 	}
+	
+	/**
+	 * Deletes a student record from database.
+	 *
+	 * @param bean StudentBean containing id of student to delete
+	 * @throws ApplicationException if a SQL error occurs during delete
+	 */
 
 	public void delete(StudentBean bean) throws ApplicationException {
 
@@ -162,6 +204,14 @@ public class StudentModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 	}
+	
+	/**
+	 * Finds a student by primary key.
+	 *
+	 * @param pk primary key of student
+	 * @return StudentBean if found, otherwise null
+	 * @throws ApplicationException if a SQL error occurs while fetching data
+	 */
 
 	public StudentBean findByPk(long pk) throws ApplicationException {
 
@@ -199,6 +249,14 @@ public class StudentModel {
 		}
 		return bean;
 	}
+	
+	/**
+	 * Finds a student by email.
+	 *
+	 * @param Email student's email to find
+	 * @return StudentBean if found, otherwise null
+	 * @throws ApplicationException if a SQL error occurs while fetching data
+	 */
 
 	public StudentBean findByEmailId(String Email) throws ApplicationException {
 
@@ -236,10 +294,27 @@ public class StudentModel {
 		}
 		return bean;
 	}
+	
+	/**
+	 * Returns all students.
+	 *
+	 * @return List of StudentBean
+	 * @throws ApplicationException if a SQL error occurs during retrieval
+	 */
 
 	public List<StudentBean> list() throws ApplicationException {
 		return search(null, 0, 0);
 	}
+	
+	/**
+	 * Searches students based on provided filter bean and supports pagination.
+	 *
+	 * @param bean     StudentBean filter (null means no filter)
+	 * @param pageNo   page number (1-based). If pageSize &gt; 0, pageNo is used to compute offset.
+	 * @param pageSize number of records per page. If 0, returns all matching rows.
+	 * @return List of StudentBean matching criteria
+	 * @throws ApplicationException if a SQL error occurs during search
+	 */
 
 	public List<StudentBean> search(StudentBean bean, int pageNo, int pageSize) throws ApplicationException {
 

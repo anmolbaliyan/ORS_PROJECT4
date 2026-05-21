@@ -15,7 +15,17 @@ import in.com.rays.proj4.exception.DatabaseException;
 import in.com.rays.proj4.exception.DuplicateRecordException;
 import in.com.rays.proj4.util.JDBCDataSource;
 
-
+/**
+ * FacultyModel provides CRUD and search operations for {@link FacultyBean}
+ * against the database table {@code st_faculty}.
+ * <p>
+ * It uses {@link JDBCDataSource} to obtain and close connections and throws
+ * application-specific checked exceptions to signal error conditions.
+ * </p>
+ * 
+ * @author Anmol Kumar Baliyan
+ * @version 1.0
+ */
 
 public class FacultyModel {
 

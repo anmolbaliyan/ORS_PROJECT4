@@ -12,7 +12,25 @@ import in.com.rays.proj4.exception.DatabaseException;
 import in.com.rays.proj4.exception.DuplicateRecordException;
 import in.com.rays.proj4.util.JDBCDataSource;
 
+/**
+ * RoleModel provides CRUD operations and search/list utilities for RoleBean.
+ *
+ * <p>
+ * This class uses JDBC to interact with the {@code st_role} table and throws
+ * application-specific exceptions defined in the project.
+ * </p>
+ *
+ * @author Anmol Kumar Bliyan
+ * @version 1.0
+ */
 public class RoleModel {
+	
+	 /**
+     * Returns next primary key value for st_role table.
+     *
+     * @return next primary key (Integer)
+     * @throws DatabaseException if a database access error occurs
+     */
 
 	public Integer nextPk() throws DatabaseException {
 
@@ -36,6 +54,10 @@ public class RoleModel {
 		}
 		return pk + 1;
 	}
+	
+	 /**
+     * Adds a new role record into database.
+     */
 
 	public long add(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 
@@ -76,6 +98,10 @@ public class RoleModel {
 		}
 		return pk;
 	}
+	
+	  /**
+     * Updates an existing role record.
+     */
 
 	public void update(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 
@@ -114,6 +140,10 @@ public class RoleModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 	}
+	
+	/**
+     * Deletes a role record from database.
+     */
 
 	public void delete(RoleBean bean) throws ApplicationException {
 
@@ -138,6 +168,10 @@ public class RoleModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 	}
+	
+	/**
+     * Finds a role by primary key.
+     */
 
 	public RoleBean findByPk(long pk) throws ApplicationException {
 
@@ -170,6 +204,10 @@ public class RoleModel {
 		}
 		return bean;
 	}
+	
+	 /**
+     * Finds a role by name.
+     */
 
 	public RoleBean findByName(String name) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_role where name = ?");
@@ -199,10 +237,18 @@ public class RoleModel {
 		}
 		return bean;
 	}
+	
+	/**
+     * Returns all roles.
+     */
 
 	public List<RoleBean> list() throws ApplicationException {
 		return search(null, 0, 0);
 	}
+	
+	 /**
+     * Searches roles based on provided filter bean and supports pagination.
+     */
 
 	public List<RoleBean> search(RoleBean bean, int pageNo, int pageSize) throws ApplicationException {
 
