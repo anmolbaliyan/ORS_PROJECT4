@@ -8,6 +8,9 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 <script src="/ORS_Project4/js/checkbox.js"></script>
 <script src="/ORS_Project4/js/datepicker.js"></script>

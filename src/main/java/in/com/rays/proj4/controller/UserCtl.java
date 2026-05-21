@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import in.com.rays.proj4.bean.BaseBean;
 import in.com.rays.proj4.bean.RoleBean;
 import in.com.rays.proj4.bean.UserBean;
@@ -56,6 +58,8 @@ import in.com.rays.proj4.util.ServletUtility;
 @WebServlet(name = "UserCtl", urlPatterns = { "/ctl/UserCtl" })
 public class UserCtl extends BaseCtl {
 
+	private static final Logger log = Logger.getLogger(UserCtl.class);
+
 	/**
 	 * 
 	 * Preloads data required for the user form.
@@ -79,6 +83,9 @@ public class UserCtl extends BaseCtl {
 	 */
 	@Override
 	protected void preload(HttpServletRequest request) {
+
+		log.debug("UserCtl preload() called");
+
 		RoleModel roleModel = new RoleModel();
 		try {
 			List<RoleBean> roleList = roleModel.list();
