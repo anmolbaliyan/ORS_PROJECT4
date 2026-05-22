@@ -168,5 +168,11 @@ public interface ORSView {
 
     public String TBANKING_LIST_VIEW = PAGE_FOLDER + "/TBankingListView.jsp";
     public String TBANKING_LIST_CTL = APP_CONTEXT + "/ctl/TBankingListCtl";
+    
+    public String TIOTDEVICE_VIEW = PAGE_FOLDER + "/TIotDeviceView.jsp";
+    public String TIOTDEVICE_CTL = APP_CONTEXT + "/ctl/TIotDeviceCtl";
+
+    public String TIOTDEVICE_LIST_VIEW = PAGE_FOLDER + "/TIotDeviceListView.jsp";
+    public String TIOTDEVICE_LIST_CTL = APP_CONTEXT + "/ctl/TIotDeviceListCtl";
 
 }

@@ -93,6 +93,10 @@
 	<b>|</b>
 	<a href=<%=ORSView.TBANKING_LIST_CTL%>><b>TBanking List</b></a>
 	<b>|</b>
+	<a href=<%=ORSView.TIOTDEVICE_CTL%>><b>Add TIotDevice</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.TIOTDEVICE_LIST_CTL%>><b>TIotDevice List</b></a>
+	<b>|</b>
 	<a target="blank" href="<%=ORSView.JAVA_DOC%>"><b>Java Doc</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.LOGIN_CTL + "?operation=Logout"%>"><b>Logout</b></a>
