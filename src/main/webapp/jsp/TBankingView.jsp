@@ -70,7 +70,7 @@
 					</th>
 
 					<td><input type="text" name="balance"
-						placeholder="Enter Balance" value="<%=bean.getBalance()%>">
+						placeholder="Enter Balance" value="<%=bean.getBalance()== 0 ? "" :bean.getBalance()%>">
 					</td>
 
 					<td><font color="red"> <%=ServletUtility.getErrorMessage("balance", request)%>
@@ -96,7 +96,7 @@
 
 					<td><input type="text" name="transactionId"
 						placeholder="Enter Transaction Id"
-						value="<%=bean.getTransactionId()%>"></td>
+						value="<%=bean.getTransactionId()== 0 ? "" :bean.getTransactionId()%>"></td>
 
 					<td><font color="red"> <%=ServletUtility.getErrorMessage("transactionId", request)%>
 					</font></td>

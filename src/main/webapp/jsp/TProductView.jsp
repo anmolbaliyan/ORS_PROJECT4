@@ -81,7 +81,7 @@
 					</th>
 
 					<td><input type="text" name="price" placeholder="Enter Price"
-						value="<%=bean.getPrice()%>"></td>
+						value="<%=bean.getPrice()== 0 ? "" :bean.getPrice() %>"></td>
 
 					<td><font color="red"> <%=ServletUtility.getErrorMessage("price", request)%>
 					</font></td>
@@ -92,7 +92,7 @@
 					</th>
 
 					<td><input type="text" name="quantity"
-						placeholder="Enter Quantity" value="<%=bean.getQuantity()%>">
+						placeholder="Enter Quantity" value="<%=bean.getQuantity()== 0 ? "" :bean.getQuantity()%>">
 					</td>
 
 					<td><font color="red"> <%=ServletUtility.getErrorMessage("quantity", request)%>

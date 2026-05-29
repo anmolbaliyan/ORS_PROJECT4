@@ -17,13 +17,20 @@
 
 </head>
 <body>
+	<td rowspan="2">
+		<h1 align="right">
+			<img src="<%=ORSView.APP_CONTEXT%>/img/customLogo.jpg" width="175"
+				height="50">
+		</h1>
+	</td>
 	<%
 	UserBean user = (UserBean) session.getAttribute("user");
 	%>
 	<%
 	if (user != null) {
 	%>
-	<h3>
+
+	<h3 align="left">
 		Hi,
 		<%=user.getFirstName()%>
 		(<%=session.getAttribute("role")%>)
@@ -96,6 +103,14 @@
 	<a href=<%=ORSView.TIOTDEVICE_CTL%>><b>Add TIotDevice</b></a>
 	<b>|</b>
 	<a href=<%=ORSView.TIOTDEVICE_LIST_CTL%>><b>TIotDevice List</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.T_SMARTHOME_CTL%>><b>Add TSmartHome</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.T_SMARTHOME_LIST_CTL%>><b>TSmartHome List</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.THOSPITALSYSTEM_CTL%>><b>Add THospitalSystem</b></a>
+	<b>|</b>
+	<a href=<%=ORSView.THOSPITALSYSTEM_LIST_CTL%>><b>THospitalSystem List</b></a>
 	<b>|</b>
 	<a target="blank" href="<%=ORSView.JAVA_DOC%>"><b>Java Doc</b></a>
 	<b>|</b>

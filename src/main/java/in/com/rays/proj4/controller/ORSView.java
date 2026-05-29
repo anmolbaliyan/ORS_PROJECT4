@@ -174,5 +174,17 @@ public interface ORSView {
 
     public String TIOTDEVICE_LIST_VIEW = PAGE_FOLDER + "/TIotDeviceListView.jsp";
     public String TIOTDEVICE_LIST_CTL = APP_CONTEXT + "/ctl/TIotDeviceListCtl";
+    
+    public String T_SMARTHOME_VIEW = PAGE_FOLDER + "/T_SmartHomeView.jsp";
+    public String T_SMARTHOME_CTL = APP_CONTEXT + "/ctl/T_SmartHomeCtl";
+
+    public String T_SMARTHOME_LIST_VIEW = PAGE_FOLDER + "/T_SmartHomeListView.jsp";
+    public String T_SMARTHOME_LIST_CTL = APP_CONTEXT + "/ctl/T_SmartHomeListCtl";
+    
+    public String THOSPITALSYSTEM_VIEW = PAGE_FOLDER + "/THospitalSystemView.jsp";
+    public String THOSPITALSYSTEM_CTL = APP_CONTEXT + "/ctl/THospitalSystemCtl";
+
+    public String THOSPITALSYSTEM_LIST_VIEW = PAGE_FOLDER + "/THospitalSystemListView.jsp";
+    public String THOSPITALSYSTEM_LIST_CTL = APP_CONTEXT + "/ctl/THospitalSystemListCtl";
 
 }

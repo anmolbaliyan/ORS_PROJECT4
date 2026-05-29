@@ -67,7 +67,7 @@
 					</th>
 
 					<td><input type="text" name="deviceId"
-						placeholder="Enter Device ID" value="<%=bean.getDeviceId()%>">
+						placeholder="Enter Device ID" value="<%=bean.getDeviceId()== 0 ? "" :bean.getDeviceId()%>">
 					</td>
 
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("deviceId", request)%>
@@ -119,7 +119,7 @@
 
 					<td><input type="text" name="batteryLevel"
 						placeholder="Enter Battery Level"
-						value="<%=bean.getBatteryLevel()%>"></td>
+						value="<%=bean.getBatteryLevel()== 0 ? "" :bean.getBatteryLevel()%>"></td>
 
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("batteryLevel", request)%>
 					</font></td>
